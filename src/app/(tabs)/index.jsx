@@ -11,7 +11,9 @@ export default function Page() {
 	const isDark = colorScheme === "dark";
 
 	return (
-		<SafeAreaView className="flex-1 bg-background dark:bg-background">
+		<SafeAreaView
+			className="flex-1 bg-background dark:bg-background"
+			edges={["top"]}>
 			<View className="flex-1 px-6 pt-8 gap-4">
 				<Text className="text-3xl font-extrabold text-foreground dark:text-foreground">
 					Welcome!
@@ -36,8 +38,7 @@ export default function Page() {
 					</Text>
 					<Pressable
 						className="bg-primary h-14 rounded-2xl items-center justify-center active:opacity-90"
-						onPress={() => signOut()}
-					>
+						onPress={() => signOut()}>
 						<Text className="text-primary-foreground font-semibold text-base">
 							Sign out
 						</Text>
