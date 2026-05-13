@@ -1,12 +1,29 @@
+import { useGroceryStore } from "@/store/groceryStore";
 import { useAuth } from "@clerk/expo";
-import { Redirect, Stack } from "expo-router";
+import { Redirect, Stack, useFocusEffect } from "expo-router";
 import { NativeTabs } from "expo-router/build/native-tabs";
 import { useColorScheme } from "nativewind";
+import { useCallback, useEffect } from "react";
 
 export default function TabsLayout() {
 	const { isSignedIn, isLoaded } = useAuth();
+
+	const { loadItems, items } = useGroceryStore();
+
 	const colorScheme = useColorScheme()
 	const isdark = colorScheme === "dark"; 
+
+	// useEffect(()=>{
+	// 	loadItems();
+	// },[])
+
+	useFocusEffect(
+		useCallback(() => {
+			loadItems();
+		}, []),
+	);
+
+	console.log(items, "items");
 
 	if (!isLoaded) {
 		return null;
