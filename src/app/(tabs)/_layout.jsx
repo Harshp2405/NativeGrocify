@@ -23,7 +23,7 @@ export default function TabsLayout() {
 		}, []),
 	);
 
-	console.log(items, "items");
+	// console.log(items, "items");
 
 	if (!isLoaded) {
 		return null;
