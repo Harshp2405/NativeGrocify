@@ -29,9 +29,9 @@ export async function POST(Request) {
 			);
 		}
 
-        const res = await createItem({ name, category, quantity, priority });
+        const item = await createItem({ name, category, quantity, priority });
 
-        return Response.json({item} , {status:201})
+        return Response.json({ item }, { status: 201 })
 	} catch (error) {
         const message = error instanceof Error ? error.message : "Failed to Insert items";
 

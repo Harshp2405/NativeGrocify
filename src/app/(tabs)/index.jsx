@@ -90,7 +90,7 @@ export default function Page() {
 							</View>
 						</View>
 					}
-					ListEmptyComponent={<Text>No Data</Text>}
+					ListEmptyComponent={<Text className="text-2xl text-center text-white">No Data</Text>}
 					ListFooterComponent={<CompletedItems />}
 				/>
 			</ScrollView>
