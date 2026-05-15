@@ -160,3 +160,42 @@ export default function Page() {
 				/>
 
 */
+
+
+
+
+
+// with FlashList
+
+/*
+
+import { FlashList } from "@shopify/flash-list";
+
+<FlashList
+					className="flex-1"
+					data={pendingItems}
+					estimatedItemSize={80}
+					contentContainerStyle={{ padding: 10 }}
+					ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+					renderItem={({ item }) => <PendingitemCard item={item} />}
+					keyExtractor={(item) => item.id}
+					ListHeaderComponent={
+						<View style={{ gap: 15, marginBottom: 10 }}>
+							<ListHeroCard />
+
+							<View className="flex-row items-center justify-between px-1">
+								<Text className="text-sm font-semibold uppercase tracking-[1px] text-muted-foreground">
+									Shopping Items
+								</Text>
+
+								<Text className="text-sm text-muted-foreground">
+									{pendingItems.length} Active
+								</Text>
+							</View>
+						</View>
+					}
+					ListEmptyComponent={<Text className="text-2xl text-center text-white">No Data</Text>}
+					ListFooterComponent={<CompletedItems />}
+				/>
+
+*/
