@@ -5,6 +5,7 @@ import { LegendList } from "@legendapp/list";
 import DropDown from "@/components/DropDown/DropDown";
 import CheckBoxList from "@/components/CheckBox/CheckBoxList";
 import RadioButtonList from "@/components/Radio/RadioButtonList";
+import Combo from "@/components/Combo/Combo";
 
 const TestApi = () => {
 	const [users, setUsers] = useState([]);
@@ -110,6 +111,20 @@ radioUser])
 						{/* CheckBoxList */}
 						<View className="gap-2">
 							<CheckBoxList
+								label="Select Multiple Users (CheckBox)"
+								options={userOptions}
+								values={checkedUsers}
+								onChange={setCheckedUsers}
+							/>
+							{checkedUsers.length > 0 && (
+								<Text className="text-sm text-muted-foreground px-1">
+									Checked IDs: {checkedUsers.join(", ")}
+								</Text>
+							)}
+						</View>
+						{/* ComboList */}
+						<View className="gap-2">
+							<Combo
 								label="Select Multiple Users (CheckBox)"
 								options={userOptions}
 								values={checkedUsers}
