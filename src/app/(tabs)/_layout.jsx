@@ -51,9 +51,14 @@ export default function TabsLayout() {
 				<NativeTabs.Trigger.Icon sf="chart.bar.fill" md="insights" />
 			</NativeTabs.Trigger>
 
-			
+
 			<NativeTabs.Trigger name="testapi" href="/(tabs)/testapi">
 				<NativeTabs.Trigger.Label>Test API</NativeTabs.Trigger.Label>
+				<NativeTabs.Trigger.Icon sf="chart.bar.fill" md="insights" />
+			</NativeTabs.Trigger>
+
+			<NativeTabs.Trigger name="sectionlist" href="/(tabs)/sectionlist">
+				<NativeTabs.Trigger.Label>Section List</NativeTabs.Trigger.Label>
 				<NativeTabs.Trigger.Icon sf="chart.bar.fill" md="insights" />
 			</NativeTabs.Trigger>
 		</NativeTabs>

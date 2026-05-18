@@ -69,6 +69,7 @@ export default function Page() {
 				<TabScreenBackground />
 
 				<FlatList
+				
 					className="flex-1"
 					data={pendingItems}
 					contentInsetAdjustmentBehavior="automatic"

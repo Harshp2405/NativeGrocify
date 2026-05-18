@@ -1,0 +1,146 @@
+[
+  {
+    "sectionId": "sec_001",
+    "title": "Fruits",
+    "subtitle": "Fresh seasonal fruits",
+    "horizontal": false,
+    "data": [
+      {
+        "id": "1",
+        "name": "Apple",
+        "description": "Fresh red apples",
+        "price": 120,
+        "quantity": 10,
+        "unit": "kg",
+        "rating": 4.5,
+        "isAvailable": true,
+        "isFavorite": false,
+        "discount": 10,
+        "image": "https://example.com/images/apple.png",
+        "tags": ["fresh", "organic"],
+        "createdAt": "2026-05-18T10:00:00Z"
+      },
+      {
+        "id": "2",
+        "name": "Banana",
+        "description": "Organic bananas",
+        "price": 60,
+        "quantity": 25,
+        "unit": "dozen",
+        "rating": 4.2,
+        "isAvailable": true,
+        "isFavorite": true,
+        "discount": 5,
+        "image": "https://example.com/images/banana.png",
+        "tags": ["organic", "healthy"],
+        "createdAt": "2026-05-18T10:05:00Z"
+      },
+      {
+        "id": "3",
+        "name": "Orange",
+        "description": "Juicy oranges",
+        "price": 90,
+        "quantity": 15,
+        "unit": "kg",
+        "rating": 4.7,
+        "isAvailable": false,
+        "isFavorite": false,
+        "discount": 15,
+        "image": "https://example.com/images/orange.png",
+        "tags": ["citrus", "vitamin-c"],
+        "createdAt": "2026-05-18T10:10:00Z"
+      }
+    ]
+  },
+  {
+    "sectionId": "sec_002",
+    "title": "Vegetables",
+    "subtitle": "Farm fresh vegetables",
+    "horizontal": true,
+    "data": [
+      {
+        "id": "4",
+        "name": "Carrot",
+        "description": "Crunchy carrots",
+        "price": 50,
+        "quantity": 30,
+        "unit": "kg",
+        "rating": 4.1,
+        "isAvailable": true,
+        "isFavorite": false,
+        "discount": 8,
+        "image": "https://example.com/images/carrot.png",
+        "tags": ["healthy", "fresh"],
+        "createdAt": "2026-05-18T11:00:00Z"
+      },
+      {
+        "id": "5",
+        "name": "Potato",
+        "description": "Premium potatoes",
+        "price": 40,
+        "quantity": 100,
+        "unit": "kg",
+        "rating": 4.0,
+        "isAvailable": true,
+        "isFavorite": true,
+        "discount": 3,
+        "image": "https://example.com/images/potato.png",
+        "tags": ["daily-use"],
+        "createdAt": "2026-05-18T11:10:00Z"
+      },
+      {
+        "id": "6",
+        "name": "Tomato",
+        "description": "Fresh tomatoes",
+        "price": 70,
+        "quantity": 45,
+        "unit": "kg",
+        "rating": 4.4,
+        "isAvailable": true,
+        "isFavorite": false,
+        "discount": 12,
+        "image": "https://example.com/images/tomato.png",
+        "tags": ["fresh", "cooking"],
+        "createdAt": "2026-05-18T11:20:00Z"
+      }
+    ]
+  },
+  {
+    "sectionId": "sec_003",
+    "title": "Beverages",
+    "subtitle": "Hot and cold drinks",
+    "horizontal": false,
+    "data": [
+      {
+        "id": "7",
+        "name": "Coffee",
+        "description": "Premium coffee beans",
+        "price": 200,
+        "quantity": 20,
+        "unit": "pack",
+        "rating": 4.8,
+        "isAvailable": true,
+        "isFavorite": true,
+        "discount": 20,
+        "image": "https://example.com/images/coffee.png",
+        "tags": ["hot", "energy"],
+        "createdAt": "2026-05-18T12:00:00Z"
+      },
+      {
+        "id": "8",
+        "name": "Tea",
+        "description": "Green tea pack",
+        "price": 150,
+        "quantity": 35,
+        "unit": "box",
+        "rating": 4.3,
+        "isAvailable": false,
+        "isFavorite": false,
+        "discount": 7,
+        "image": "https://example.com/images/tea.png",
+        "tags": ["green-tea", "healthy"],
+        "createdAt": "2026-05-18T12:10:00Z"
+      }
+    ]
+  }
+]

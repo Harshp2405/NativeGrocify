@@ -55,9 +55,9 @@ const TestApi = () => {
 //   }));
 
   useEffect(()=>{
-	console.log(selectedUser , "selectedUser")
-	console.log(checkedUsers , "checkedUsers")
-	console.log(radioUser , "radioUser")
+	// console.log(selectedUser , "selectedUser")
+	// console.log(checkedUsers , "checkedUsers")
+	// console.log(radioUser , "radioUser")
   } , [selectedUser||
 checkedUsers||
 radioUser])
