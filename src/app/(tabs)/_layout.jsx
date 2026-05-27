@@ -61,6 +61,12 @@ export default function TabsLayout() {
 				<NativeTabs.Trigger.Label>Section List</NativeTabs.Trigger.Label>
 				<NativeTabs.Trigger.Icon sf="chart.bar.fill" md="insights" />
 			</NativeTabs.Trigger>
+		
+		
+			<NativeTabs.Trigger name="ChatApp" href="/(tabs)/ChatApp">
+				<NativeTabs.Trigger.Label>Chat App</NativeTabs.Trigger.Label>
+				<NativeTabs.Trigger.Icon sf="chart.bar.fill" md="insights" />
+			</NativeTabs.Trigger>
 		</NativeTabs>
 	);
 }

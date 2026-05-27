@@ -15,73 +15,91 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
   const [code, setCode] = useState('')
+  const [formError, setFormError] = useState('')
 
   const handleSubmit = async () => {
-    const { error } = await signIn.password({
-      emailAddress,
-      password,
-    })
-    if (error) {
-      console.error(JSON.stringify(error, null, 2))
-      return
-    }
-
-    if (signIn.status === 'complete') {
-      await signIn.finalize({
-        navigate: ({ session, decorateUrl }) => {
-          if (session?.currentTask) {
-            console.log(session?.currentTask)
-            return
-          }
-
-          const url = decorateUrl('/')
-          if (url.startsWith('http')) {
-            window.location.href = url
-          } else {
-            router.push(url)
-          }
-        },
+    try {
+      setFormError('')
+      const { error } = await signIn.password({
+        emailAddress,
+        password,
       })
-    } else if (signIn.status === 'needs_second_factor') {
-      
-    } else if (signIn.status === 'needs_client_trust') {
-      const emailCodeFactor = signIn.supportedSecondFactors.find(
-        (factor) => factor.strategy === 'email_code',
-      )
-
-      if (emailCodeFactor) {
-        await signIn.mfa.sendEmailCode()
+      if (error) {
+        console.error(JSON.stringify(error, null, 2))
+        const firstError = error.errors?.[0]
+        setFormError(firstError?.message || 'Something went wrong.')
+        return
       }
-    } else {
-      console.error('Sign-in attempt not complete:', signIn)
+
+      if (signIn.status === 'complete') {
+        await signIn.finalize({
+          navigate: ({ session, decorateUrl }) => {
+            if (session?.currentTask) {
+              console.log(session?.currentTask)
+              return
+            }
+
+            const url = decorateUrl('/')
+            if (url.startsWith('http')) {
+              window.location.href = url
+            } else {
+              router.push(url)
+            }
+          },
+        })
+      } else if (signIn.status === 'needs_second_factor' || signIn.status === 'needs_client_trust') {
+        const emailCodeFactor = signIn.supportedSecondFactors?.find(
+          (factor) => factor.strategy === 'email_code',
+        )
+
+        if (emailCodeFactor) {
+          await signIn.mfa.sendEmailCode()
+
+        } else {
+          setFormError('Verification code strategy email_code not supported.')
+        }
+      } else {
+        console.error('Sign-in attempt not complete:', signIn)
+        setFormError(`Sign-in status: ${signIn.status}`)
+      }
+    } catch (err) {
+      console.error(err)
+      setFormError(err?.message || 'Something went wrong.')
     }
   }
 
   const handleVerify = async () => {
-    await signIn.mfa.verifyEmailCode({ code })
+    try {
+      setFormError('')
+      await signIn.mfa.verifyEmailCode({ code })
 
-    if (signIn.status === 'complete') {
-      await signIn.finalize({
-        navigate: ({ session, decorateUrl }) => {
-          if (session?.currentTask) {
-            console.log(session?.currentTask)
-            return
-          }
+      if (signIn.status === 'complete') {
+        await signIn.finalize({
+          navigate: ({ session, decorateUrl }) => {
+            if (session?.currentTask) {
+              console.log(session?.currentTask)
+              return
+            }
 
-          const url = decorateUrl('/')
-          if (url.startsWith('http')) {
-            window.location.href = url
-          } else {
-            router.push(url)
-          }
-        },
-      })
-    } else {
-      console.error('Sign-in attempt not complete:', signIn)
+            const url = decorateUrl('/')
+            if (url.startsWith('http')) {
+              window.location.href = url
+            } else {
+              router.push(url)
+            }
+          },
+        })
+      } else {
+        console.error('Sign-in attempt not complete:', signIn)
+        setFormError(`Sign-in status: ${signIn.status}`)
+      }
+    } catch (err) {
+      console.error(err)
+      setFormError(err?.message || 'Something went wrong.')
     }
   }
 
-  if (signIn.status === 'needs_client_trust') {
+  if (signIn.status === 'needs_client_trust' || signIn.status === 'needs_second_factor') {
     return (
       <SafeAreaView className="flex-1 bg-primary dark:bg-background" edges={['top']}>
         <View className="mt-8 flex-1 rounded-t-[36px] bg-card dark:bg-card px-6 pb-8 pt-6 gap-3">
@@ -97,6 +115,9 @@ export default function Page() {
           {errors.fields.code && (
             <Text className="text-red-700 text-xs -mt-2">{errors.fields.code.message}</Text>
           )}
+          {formError ? (
+            <Text className="text-red-500 text-sm mt-1">{formError}</Text>
+          ) : null}
           <Pressable
             className={`bg-primary h-14 rounded-2xl items-center justify-center mt-2 active:opacity-90 ${fetchStatus === 'fetching' ? 'opacity-50' : ''}`}
             onPress={handleVerify}
@@ -177,6 +198,9 @@ export default function Page() {
           {errors.fields.password && (
             <Text className="text-destructive-foreground dark:text-destructive-foreground text-xs -mt-2">{errors.fields.password.message}</Text>
           )}
+          {formError ? (
+            <Text className="text-red-500 text-sm mt-1">{formError}</Text>
+          ) : null}
           <Pressable
             className={`bg-primary h-14 rounded-2xl items-center justify-center mt-2 active:opacity-90 ${(!emailAddress || !password || fetchStatus === 'fetching') ? 'opacity-50' : ''}`}
             onPress={handleSubmit}

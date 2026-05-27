@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import CompletedItems from "@/components/CompletedItems";
 import ListHeroCard from "@/components/ListHeroCard";
 import PendingitemCard from "@/components/PendingitemCard";
@@ -15,7 +16,20 @@ export default function Page() {
 	const colorScheme = useColorScheme();
 	const isDark = colorScheme === "dark";
 
-	const { items } = useGroceryStore();
+	const { items, roomId, loadPersistedRoom, initSocketSync, cleanupSocketSync } = useGroceryStore();
+
+	useEffect(() => {
+		loadPersistedRoom();
+	}, []);
+
+	useEffect(() => {
+		if (roomId) {
+			initSocketSync();
+		}
+		return () => {
+			cleanupSocketSync();
+		};
+	}, [roomId]);
 
 	const pendingItems = items.filter(item => !item.purchased)
 
