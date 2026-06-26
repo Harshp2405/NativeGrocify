@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LegendList } from "@legendapp/list";
 import DropDown from "@/components/DropDown/DropDown";
@@ -9,8 +9,9 @@ import Combo from "@/components/Combo/Combo";
 
 const TestApi = () => {
 	const [users, setUsers] = useState([]);
+	const [post, setpost] = useState([]);
 	const [loading, setLoading] = useState(true);
-
+	const [visibleCount, setVisibleCount] = useState(10);
 	// DropDown state — single selected user
 	const [selectedUser, setSelectedUser] = useState(null);
 
@@ -22,6 +23,7 @@ const TestApi = () => {
 
 	useEffect(() => {
 		fetchUsers();
+		fetchPost();
 	}, []);
 
 	const fetchUsers = async () => {
@@ -42,6 +44,24 @@ const TestApi = () => {
 			setLoading(false);
 		}
 	};
+	const fetchPost = async () => {
+		try {
+			const response = await fetch("https://jsonplaceholder.typicode.com/todos")
+				.then((res) => res.json())
+				.catch((err) => {
+					console.error("Error parsing JSON:", err);
+					return [];
+				});
+
+			setpost(response);
+		} catch (error) {
+			console.error("Error fetching posts:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	console.log("Post", post, "Post");
 
 	// Use local user.json as options source
 	const userOptions = users.map((u) => ({
@@ -71,6 +91,7 @@ radioUser])
 			className="flex-1 bg-background dark:bg-background"
 			edges={["top"]}>
 			<LegendList
+				
 				data={users}
 				keyExtractor={(item) => item.id.toString()}
 				estimatedItemSize={72}
@@ -85,9 +106,18 @@ radioUser])
 					</View>
 				)}
 				ListHeaderComponent={
-					<Text className="text-base font-bold text-foreground">
-						Users (LegendList)
-					</Text>
+					<>
+						<Text className="text-base font-bold text-foreground">
+							Users (LegendList)
+						</Text>
+
+						{/* <FlatList
+							data={post.slice(0, visibleCount)}
+							keyExtractor={(item) => item.id.toString()}
+							renderItem={({ item }) => <Text>{item.id} Id</Text>}
+							onEndReached={() => setVisibleCount((prev) => prev + 10)}
+							onEndReachedThreshold={0.5}></FlatList> */}
+					</>
 				}
 				ListFooterComponent={
 					<View style={{ gap: 24, marginTop: 8 }}>
